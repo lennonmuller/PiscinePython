@@ -37,3 +37,7 @@ def analytics_dashboard() -> None:
     print("Achievements per player:", achievement_count)
 
     unique_achievements =
+
+
+if __name__ == "__main__":
+    analytics_dashboard()
