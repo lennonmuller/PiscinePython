@@ -1,8 +1,8 @@
 def analytics_dashboard() -> None:
     print("=== Game Analytics Dashboard ===\n")
-    
+
     players = ["alice", "bob", "charlie", "diana", "juninho_cancelado"]
-    scores = {"alice": 2300, "bob": 1800, "charlie": 2150, "diana": 2050,
+    scores = {"alice": 2300, "bob": 1800, "charlie": 2150, "diana": 1300,
               "juninho_cancelado": 5000}
     achievements = {
         "alice": ["first_kill", "level_10", "boss_slayer", "treasure_hunter",
@@ -36,7 +36,26 @@ def analytics_dashboard() -> None:
     print("Score categories:", score_categories)
     print("Achievements per player:", achievement_count)
 
-    unique_achievements =
+    unique_achievements = {ach for plist in achievements.values()
+                           for ach in plist}
+
+    print("\n=== Set Comprehension Examples ===")
+    print("Unique achievements:", unique_achievements)
+
+    total_players = len(players)
+    total_uniq_achiv = len(unique_achievements)
+    average_score = sum(scores.values()) / len(scores)
+
+    top_player = max(scores, key=lambda p: scores[p])
+    top_score = scores[top_player]
+    top_achievements = len(achievements[top_player])
+
+    print("\n=== Combined Analysis ===")
+    print("total players:", total_players)
+    print("Total unique achievements:", total_uniq_achiv)
+    print("Average score:", average_score)
+    print(f"Top performer: {top_player} ({top_score} points, "
+          f"{top_achievements} achievements)")
 
 
 if __name__ == "__main__":
