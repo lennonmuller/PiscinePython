@@ -18,7 +18,7 @@ def inventory_system() -> None:
             print(f"Invalid entry: {entry}")
             continue
 
-        name, qty_str = entry.split(":")
+        name, qty_str = entry.split(":", 1)
 
         try:
             qty = int(qty_str)
