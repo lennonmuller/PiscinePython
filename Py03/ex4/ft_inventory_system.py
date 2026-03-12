@@ -18,7 +18,11 @@ def inventory_system() -> None:
             print(f"Invalid entry: {entry}")
             continue
 
-        name, qty_str = entry.split(":", 1)
+        parts = entry.split(":", 1)
+        if len(parts) != 2 or parts[0] == "":
+            print(f"Invalid entry: {entry}")
+            continue
+        name, qty_str = parts
 
         try:
             qty = int(qty_str)
