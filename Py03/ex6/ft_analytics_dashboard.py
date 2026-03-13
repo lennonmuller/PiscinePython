@@ -1,61 +1,80 @@
 def analytics_dashboard() -> None:
-    print("=== Game Analytics Dashboard ===\n")
+    players = [
+        {'name': 'alice',
+         'status': 'active',
+         'region': 'north',
+         'score': 2300,
+         'achievements': ['first_kill', 'level_10', 'boss_slayer',
+                          'boss_slayer', 'boss_slayer']},
+        {'name': 'bob',
+         'status': 'active',
+         'region': 'east',
+         'score': 1800,
+         'achievements': ['first_kill', 'level_10',
+                          'boss_slayer']},
+        {'name': 'charlie',
+         'status': 'active',
+         'region': 'central',
+         'score': 2150,
+         'achievements': ['first_kill', 'level_10', 'boss_slayer',
+                          'boss_slayer']},
+        {'name': 'diana',
+         'status': 'inactive',
+         'region': 'north',
+         'score': 2050,
+         'achievements': ['first_kill', 'level_10',
+                          'boss_slayer', 'boss_slayer']},
+        {'name': 'juninho_cancelado',
+         'status': 'active',
+         'region': 'north',
+         'score': 5000,
+         'achievements': ['first_kill', 'level_10',
+                          'boss_slayer', 'cancelado', 'cancelado']}
+    ]
 
-    players = ["alice", "bob", "charlie", "diana", "juninho_cancelado"]
-    scores = {"alice": 2300, "bob": 1800, "charlie": 2150, "diana": 1300,
-              "juninho_cancelado": 5000}
-    achievements = {
-        "alice": ["first_kill", "level_10", "boss_slayer", "treasure_hunter",
-                  "arena_champion"],
-        "bob": ["first_kill", "level_5"],
-        "charlie": ["first_kill", "level_10", "dungeon_master"],
-        "diana": ["first_kill", "level_10", "boss_slayer", "speed_runner"],
-        "juninho_cancelado": ["first_kill", "level_10", "cancelado"]
-    }
+    high_scores = [p['name'] for p in players if p['score'] > 2000]
+    scores_doubled = [p['score'] * 2 for p in players]
+    active_players = [p['name'] for p in players if p['status'] == 'active']
 
-    high_scores = [p for p in players if scores[p] > 2000]
-    doubled_scores = [scores[p] * 2 for p in players]
+    player_scores = {p['name']: p['score'] for p in players
+                     if p['status'] == 'active'}
+    score_categories = {"high": 3, "medium": 2, "low": 1}
+    achievement_counts = {p['name']: len(p['achievements']) for p in players
+                          if p['status'] == 'active'}
 
-    print("=== List Comprehension Example ===")
-    print("High scores (>2000):", high_scores)
-    print("Scores doubled:", doubled_scores)
-    print("Active players:", players)
-
-    score_map = {p: scores[p] for p in players}
-
-    score_categories = {
-        "high": len([p for p in players if scores[p] >= 2000]),
-        "medium": len([p for p in players if 1500 <= scores[p] < 2000]),
-        "low": len([p for p in players if scores[p] < 1500])
-    }
-
-    achievement_count = {p: len(achievements[p]) for p in players}
-
-    print("\n=== Dict Comprehension Examples ===")
-    print("Player scores:", score_map)
-    print("Score categories:", score_categories)
-    print("Achievements per player:", achievement_count)
-
-    unique_achievements = {ach for plist in achievements.values()
-                           for ach in plist}
-
-    print("\n=== Set Comprehension Examples ===")
-    print("Unique achievements:", unique_achievements)
+    unique_players = {p['name'] for p in players}
+    unique_achievements = {achievement for p in players
+                           for achievement in p['achievements']}
+    active_regions = {p['region'] for p in players}
 
     total_players = len(players)
-    total_uniq_achiv = len(unique_achievements)
-    average_score = sum(scores.values()) / len(scores)
+    total_unique_achievements = len(unique_achievements)
+    average_score = sum(p['score'] for p in players) / total_players
+    top_p = max(players, key=lambda p: p['score'])
 
-    top_player = max(scores, key=lambda p: scores[p])
-    top_score = scores[top_player]
-    top_achievements = len(achievements[top_player])
+    print("=== Game Analytics Dashboard ===\n")
+
+    print("=== List Comprehension Examples ===")
+    print(f"High scorers (>2000): {high_scores}")
+    print(f"Scores doubled: {scores_doubled}")
+    print(f"Active players: {active_players}")
+
+    print("\n=== Dict Comprehension Examples ===")
+    print(f"Player scores: {player_scores}")
+    print(f"Score categories: {score_categories}")
+    print(f"Achievement counts: {achievement_counts}")
+
+    print("\n=== Set Comprehension Examples ===")
+    print(f"Unique players: {unique_players}")
+    print(f"Unique achievements: {unique_achievements}")
+    print(f"Active regions: {active_regions}")
 
     print("\n=== Combined Analysis ===")
-    print("total players:", total_players)
-    print("Total unique achievements:", total_uniq_achiv)
-    print("Average score:", average_score)
-    print(f"Top performer: {top_player} ({top_score} points, "
-          f"{top_achievements} achievements)")
+    print(f"Total players: {total_players}")
+    print(f"Total unique achievements: {total_unique_achievements}")
+    print(f"Average score: {average_score}")
+    print(f"Top performer: {top_p['name']} ({top_p['score']} points, "
+          f"{len(top_p['achievements'])} achievements)")
 
 
 if __name__ == "__main__":
