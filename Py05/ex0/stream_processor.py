@@ -51,7 +51,8 @@ class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
         if data is None:
             return False
-        if isinstance(data, str) and bool(data) and "ERROR" or "INFO" in data:
+        if isinstance(data, str) and bool(data) and ("ERROR" in data or "INFO"
+                                                     in data):
             return True
         return False
 
