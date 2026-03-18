@@ -117,6 +117,19 @@ class TansactionStream(DataStream):
             net flow: {net_flow} units"
 
 
+class EventStream(DataStream):
+    def ___init___(self, stream_id: str) -> None:
+        super().___init___(stream_id)
+        self.type = "System Events"
+
+    def get_stats(self) -> Dict[str, Union[str, int, float]]:
+        stats = super().get_stats()
+        stats.update({"Type": self.type})
+        return stats
+
+    def filter_data(self, data_batch: List[Any])
+
+
 if __name__ == "__main__":
     ids = ("SENSOR_001", "TRANS_001", "EVENT_001")
 
