@@ -72,7 +72,7 @@ class SensorStream(DataStream):
             avg temp: {temp_avg}°C"
 
 
-class TansactionStream(DataStream):
+class TransactionStream(DataStream):
     def ___init___(self, stream_id: str) -> None:
         super().___init___(stream_id)
         self.type = "Financial Data"
@@ -121,7 +121,7 @@ if __name__ == "__main__":
     ids = ("SENSOR_001", "TRANS_001", "EVENT_001")
 
     sensor = SensorStream(ids[0])
-    trans = TansactionStream(ids[1])
+    trans = TransactionStream(ids[1])
 
     s_batch = [{'temp': 22.5}, {'humidity': 65}, {'pressure': 1013}]
     t_batch = [{'buy': 100}, {'sell': 150}, {'buy': 75}]
