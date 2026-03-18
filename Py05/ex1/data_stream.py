@@ -127,7 +127,17 @@ class EventStream(DataStream):
         stats.update({"Type": self.type})
         return stats
 
-    def filter_data(self, data_batch: List[Any])
+    def filter_data(self, data_batch: List[Any],
+                    criteria: Optional[str] = None) -> List[Any]
+        event_batch = []
+        for data in data_batch:
+            for key, value in data.items():
+                if isinstance(key, (str)):
+                    if not criteria:
+                        if key == "login" or key == "logout" or key == "error":
+                            event_batch.append(data)
+                    elif criteria == "High-priority":
+                        
 
 
 if __name__ == "__main__":
