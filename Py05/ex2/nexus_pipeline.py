@@ -121,7 +121,7 @@ class JSONAdapter(ProcessingPipeline):
 
 
 class CSVAdapter(ProcessingPipeline):
-    def __init__(self, pipeline_id: str):
+    def __init__(self, pipeline_id: str) -> None:
         super().__init__(pipeline_id)
 
     def process(self, data: Any) -> Union[str, Any]:
@@ -132,7 +132,7 @@ class CSVAdapter(ProcessingPipeline):
 
 
 class StreamAdapter(ProcessingPipeline):
-    def __init__(self, pipeline_id: str):
+    def __init__(self, pipeline_id: str) -> None:
         super().__init__(pipeline_id)
 
     def process(self, data: Any) -> Union[str, Any]:
@@ -143,11 +143,11 @@ class StreamAdapter(ProcessingPipeline):
 
 
 class NexusManager():
-    def __init__(self):
+    def __init__(self) -> None:
         self.pipelines: Dict[str, ProcessingPipeline] = {}
         self.cpacity = 1000
 
-    def add_pipeline(self, pipeline: Any) -> None:
+    def add_pipeline(self, pipeline: ProcessingPipeline) -> None:
         self.pipelines[pipeline.pipeline_id] = pipeline
 
     def process_data(self, pipeline_id: str, data: Any) -> Union[str, Any]:
