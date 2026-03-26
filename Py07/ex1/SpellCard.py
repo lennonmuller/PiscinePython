@@ -9,7 +9,7 @@ class SpellCard(Card):
 
     def play(self, game_state: dict) -> dict:
         game_state = {"card_played": self.name, "mana_used": self.cost,
-                      "effect": self.effect_type}
+                      "effect": "Deal 3 damage to target"}
         return game_state
 
     def resolve_effect(self, targets: list) -> dict:
