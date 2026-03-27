@@ -38,7 +38,7 @@ class EliteCard(Card, Combatable, Magical):
                 "defense_damage": self.defense_damage}
 
     def cast_spell(self, spell_name: str, targets: list) -> dict:
-        total_mana = 7
+        total_mana = 11
 
         total_mana -= self.mana_cost
         return {"caster": self.name, "spell": spell_name,
