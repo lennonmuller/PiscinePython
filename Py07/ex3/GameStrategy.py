@@ -9,7 +9,7 @@ class GameStrategy(ABC):
 
     @abstractmethod
     def get_strategy_name(self) -> str:
-        return "GameStategy"
+        return "GameStrategy"
 
     @abstractmethod
     def prioritize_targets(self, available_targets: list) -> list:

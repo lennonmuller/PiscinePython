@@ -24,6 +24,6 @@ class GameEngine:
 
     def get_engine_status(self) -> dict:
         return {'turns_simulated': self.turns,
-                'strategy_used': self.strategy.get_strategy_name,
+                'strategy_used': self.strategy.get_strategy_name(),
                 'total_damage': self.total_damage,
                 'cards_created': len(self.hand)}

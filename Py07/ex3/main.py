@@ -6,7 +6,7 @@ from .GameEngine import GameEngine
 def main() -> None:
     print("\n=== DataDeck Game Engine ===\n")
 
-    hand_played = ["Fire Dragon (5)", "Goblin Warrior (2)",
+    hand_played = ["Fire Dragon (5)", "Goblin Warrior (0)",
                    "Lightning Bolt (3)"]
 
     battlefield = ['Enemy Player']
