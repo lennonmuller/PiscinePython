@@ -1,7 +1,6 @@
 from enum import Enum
 from pydantic import BaseModel, Field, ValidationError, model_validator
 from datetime import datetime
-from typing import Any
 
 
 class Rank(str, Enum):
@@ -32,27 +31,26 @@ class SpaceMission(BaseModel):
     mission_status: str = Field(default="planned")
     budget_millions: float = Field(..., ge=1.0, le=10000.0)
 
-
-@model_validator(mode="after")
-def validation_rules(self) -> "SpaceMission":
-    if not self.mission_id.startwith("M"):
-        raise ValueError('Mission ID must start with "M".')
-    cap_or_com = {Rank.capitain, Rank.commander}
-    if not any(m.rank in cap_or_com for m in self.crew):
-        raise ValueError('Must have at least one Commander or Captain.')
-    if self.duration_days > 365:
-        experienced = sum(1 for m in self.crew if m.years_experience >= 5)
-        ratio = experienced / len(self.crew)
-        if ratio < 0.5:
+    @model_validator(mode="after")
+    def validation_rules(self) -> "SpaceMission":
+        if not self.mission_id.startswith("M"):
+            raise ValueError('Mission ID must start with "M".')
+        cap_or_com = {Rank.capitain, Rank.commander}
+        if not any(m.rank in cap_or_com for m in self.crew):
+            raise ValueError('Must have at least one Commander or Captain.')
+        if self.duration_days > 365:
+            experienced = sum(1 for m in self.crew if m.years_experience >= 5)
+            ratio = experienced / len(self.crew)
+            if ratio < 0.5:
+                raise ValueError(
+                    "Long missions (365+ days) need 50%\\ experienced crew"
+                    )
+        inactive = [m.name for m in self.crew if not m.is_active]
+        if inactive:
             raise ValueError(
-                "Long missions (365+ days) need 50% experienced crew"
-                )
-    inactive = [m.name for m in self.crew if not self.is_active]
-    if inactive:
-        raise ValueError(
-            "All crew members must be active."
-        )
-    return self
+                "All crew members must be active."
+            )
+        return self
 
 
 def main() -> None:
