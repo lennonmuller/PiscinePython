@@ -43,14 +43,17 @@ def main() -> None:
     print("Artifact sorter:")
     print(artifact_sorter(artifacts))
     print(30*"=")
+    print()
 
     print("Power Filter >= 60")
     print(power_filter(mages, 60))
     print(30*"=")
+    print()
 
     print("Spell Transformer:")
     print(spell_transformer(spells))
     print(30*"=")
+    print()
 
     print("Mage Stats:")
     print(mage_stats(mages))
